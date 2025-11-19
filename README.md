@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔗 TinyLink
 
-## Getting Started
+A modern URL shortener built with Next.js 14, TypeScript, and PostgreSQL.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com/)
+
+[Live Demo](https://your-tinylink.vercel.app) • [Report Bug](../../issues)
+
+---
+
+## ✨ Features
+
+- 🔗 Shorten URLs with custom or auto-generated codes
+- 📊 Track clicks and view analytics
+- ⚡ Fast & responsive UI with Tailwind CSS
+- 🚀 One-click deploy to Vercel
+
+---
+
+## 🚀 Quick Start
 
 ```bash
+# Clone and install
+git clone https://github.com/yourusername/tinylink.git
+cd tinylink
+npm install
+
+# Set up environment
+cp .env.example .env.local
+# Add your POSTGRES_URL to .env.local
+
+# Initialize database
+psql $POSTGRES_URL -f schema.sql
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [ https://tinylink-t6spvpkt5-hafsa-ahamadis-projects.vercel.app/] (http://localhost:3000) 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔐 Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+```env
+POSTGRES_URL="postgres://username:password@host:port/database"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Database Options:**
+- [Vercel Postgres](https://vercel.com/storage/postgres) (Recommended)
+- [Neon](https://neon.tech/) (Free tier)
+- Local PostgreSQL
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📡 API Endpoints
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/healthz` | Health check |
+| `POST` | `/api/links` | Create short link |
+| `GET` | `/api/links` | List all links |
+| `GET` | `/api/links/:code` | Get link stats |
+| `DELETE` | `/api/links/:code` | Delete link |
+| `GET` | `/:code` | Redirect to target URL |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Example:**
+```bash
+curl -X POST http://localhost:3000/api/links \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://github.com", "customCode": "gh"}'
+```
+
+---
+
+## 🌐 Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/tinylink)
+
+1. Click "Deploy" button above
+2. Add `POSTGRES_URL` in environment variables
+3. Create a Postgres database in Vercel Storage
+4. Run `schema.sql` in your database
+5. Done! 🎉
+
+---
+
+## 📁 Tech Stack
+
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS
+- **Backend:** Next.js API Routes
+- **Database:** PostgreSQL with @vercel/postgres
+- **Deployment:** Vercel
+
+---
+
+## 🤝 Contributing
+
+Contributions welcome! Fork the repo and submit a pull request.
+
+---
+
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+
